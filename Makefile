@@ -3,17 +3,7 @@
 
 GO111MODULE ?= on
 
-all: fmt build test
-
-fmt:
-	gofmt -w .
-	gofmt -w shm/..
-
-test:
-	go test -v ./shm
-
-bench:
-	go test -bench=. ./shm
+all: build
 
 build:
 	go build -o bin/shmtool
