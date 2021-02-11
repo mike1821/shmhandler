@@ -1,5 +1,6 @@
 package shm
 
+// #include "shm.h"
 import "C"
 
 import (
