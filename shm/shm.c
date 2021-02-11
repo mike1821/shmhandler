@@ -69,12 +69,30 @@ int sysv_shm_close(int shm_id) {
     return shmctl(shm_id, IPC_RMID, NULL);
 }
 
-size_t sysv_shm_get_size(int shm_id) {
+int sysv_shm_get_size(int shm_id) {
     struct shmid_ds shm;
 
     if(shmctl(shm_id, IPC_STAT, &shm) >= 0) {
         return shm.shm_segsz;
     }else{
-        return -1;
+        switch(errno)
+        {
+            case EACCES:
+                return -1;
+            case EFAULT:
+                return -2;
+            case EIDRM:
+                return -3;
+            case EINVAL :
+                return -4;
+            case ENOMEM :
+                return -5;
+            case EOVERFLOW:
+                return -6;
+            case EPERM:
+                return -7;
+            default:
+                return 0;
+        }
     }
 }

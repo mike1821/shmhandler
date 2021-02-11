@@ -5,6 +5,7 @@
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
+#include <errno.h>
 
 #define IPC_KEY_PROJID 0x42
 
